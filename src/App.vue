@@ -61,7 +61,6 @@ import AppSettings from './components/AppSettings'
 import NavigationList from './components/NavigationList'
 import AppHelp from './components/AppHelp'
 import store from './store'
-import Vue from 'vue'
 
 export default {
 	name: 'App',
