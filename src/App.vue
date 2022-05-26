@@ -19,14 +19,13 @@
 			</template>
 
 			<AppNavigationItem
-				pinned=True
-				:title="t('notes', 'Help')"
+				:pinned="true"
+				:title=" t('notes', 'Help') "
 				icon="icon-info"
 				@click="openHelp"
 			/>
-			<AppHelp v-if="helpVisible" settingsOpen="helpVisible" @popupClosed="helpVisible = false" ></AppHelp>
-			<AppNavigationItem
-				pinned=True>
+			<AppHelp v-if="helpVisible" :settingsOpen="this.helpVisible" @popupClosed="helpVisible = false"></AppHelp>
+			<AppNavigationItem :pinned="true">
 				<AppSettings v-if="!loading.notes && error !== true" @reload="reloadNotes" />
 			</AppNavigationItem>
 		</AppNavigation>
@@ -237,8 +236,8 @@ export default {
 		},
 
 		openHelp() {
-			this.helpVisible = !this.helpVisible;
-			this.helpVisible = true;
+			this.helpVisible = !this.helpVisible
+			this.helpVisible = true
 		},
 		onNewNote() {
 			if (this.loading.create) {
