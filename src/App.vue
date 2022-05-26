@@ -18,9 +18,17 @@
 				/>
 			</template>
 
-			<template #footer>
+			<AppNavigationItem
+				pinned=True
+				:title="t('notes', 'Help')"
+				icon="icon-info"
+				@click="openHelp"
+			/>
+			<AppHelp v-if="helpVisible" settingsOpen="helpVisible" @popupClosed="helpVisible = false" ></AppHelp>
+			<AppNavigationItem
+				pinned=True>
 				<AppSettings v-if="!loading.notes && error !== true" @reload="reloadNotes" />
-			</template>
+			</AppNavigationItem>
 		</AppNavigation>
 
 		<AppContent v-if="error">
@@ -40,6 +48,7 @@
 import {
 	AppContent,
 	AppNavigation,
+	AppNavigationItem,
 	AppNavigationNew,
 	Content,
 } from '@nextcloud/vue'
@@ -50,14 +59,18 @@ import { config } from './config'
 import { fetchNotes, noteExists, createNote, undoDeleteNote } from './NotesService'
 import AppSettings from './components/AppSettings'
 import NavigationList from './components/NavigationList'
+import AppHelp from './components/AppHelp'
 import store from './store'
+import Vue from 'vue'
 
 export default {
 	name: 'App',
 
 	components: {
+		AppHelp,
 		AppContent,
 		AppNavigation,
+		AppNavigationItem,
 		AppNavigationNew,
 		AppSettings,
 		Content,
@@ -78,6 +91,7 @@ export default {
 			undoTimer: null,
 			deletedNotes: [],
 			refreshTimer: null,
+			helpVisible: false,
 		}
 	},
 
@@ -223,6 +237,10 @@ export default {
 			}
 		},
 
+		openHelp() {
+			this.helpVisible = !this.helpVisible;
+			this.helpVisible = true;
+		},
 		onNewNote() {
 			if (this.loading.create) {
 				return
