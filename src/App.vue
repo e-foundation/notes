@@ -18,16 +18,16 @@
 				/>
 			</template>
 
-			<AppNavigationItem
-				:pinned="true"
-				:title=" t('notes', 'Help') "
-				icon="icon-info"
-				@click="openHelp"
-			/>
-			<AppHelp v-if="helpVisible" :settingsOpen="this.helpVisible" @popupClosed="helpVisible = false"></AppHelp>
-			<AppNavigationItem :pinned="true">
+			<AppHelp v-if="!loading.notes && helpVisible" :settingsOpen="this.helpVisible" @popupClosed="helpVisible = false"></AppHelp>
+			<template slot="footer">
+				<AppNavigationItem
+					:title=" t('notes', 'Help')"
+					icon="icon-info"
+					@click="openHelp"
+				/>
 				<AppSettings v-if="!loading.notes && error !== true" @reload="reloadNotes" />
-			</AppNavigationItem>
+			</template>
+
 		</AppNavigation>
 
 		<AppContent v-if="error">
