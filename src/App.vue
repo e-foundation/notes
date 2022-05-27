@@ -18,7 +18,7 @@
 				/>
 			</template>
 
-			<AppHelp v-if="!loading.notes && helpVisible" :settingsOpen="this.helpVisible" @popupClosed="helpVisible = false"></AppHelp>
+			<AppHelp v-if="!loading.notes && helpVisible" :settingsOpen="helpVisible" @popupClosed="helpVisible = false" />
 			<template slot="footer">
 				<AppNavigationItem
 					:title=" t('notes', 'Help')"
@@ -27,7 +27,6 @@
 				/>
 				<AppSettings v-if="!loading.notes && error !== true" @reload="reloadNotes" />
 			</template>
-
 		</AppNavigation>
 
 		<AppContent v-if="error">
